@@ -5,14 +5,14 @@ Identicon for Python
 
 This is a Python library which generates identicons based on a given string.
 
-Inspired by [https://github.com/bitverseio/identicon]
+Inspired by <https://github.com/bitverseio/identicon>
 
 How to use
 -----------
 ```python
   from iden import Iden
   i = Iden('hello world') # (text, type_iden='pixel', size=None)
-  i.setBackgroundColor('#EEEEEE')
+  i.setBackgroundColor('#EEEEEE') # default #FFFFFF
 
   print i.getIcon() # return svg code
   # or
