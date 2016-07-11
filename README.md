@@ -1,8 +1,6 @@
 Identicon for Python
 =====================
 
-<img src="https://github.com/fdcore/python-iden-svg/raw/master/demo.svg" width="200" />
-
 This is a Python library which generates identicons based on a given string.
 
 Inspired by <https://github.com/bitverseio/identicon>
