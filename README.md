@@ -1,7 +1,7 @@
 Identicon for Python
 =====================
 
-<img src="https://cdn.rawgit.com/fdcore/python-iden-svg/master/demo.svg" width="200" />
+<img src="https://github.com/fdcore/python-iden-svg/raw/master/demo.svg" width="200" />
 
 This is a Python library which generates identicons based on a given string.
 
