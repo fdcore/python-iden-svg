@@ -1,7 +1,9 @@
 import struct
 import hashlib
 import math
-
+import binascii
+from functools import reduce
+ 
 class SvgNode:
     fillColor = ''
     strokeColor = ''
@@ -76,7 +78,8 @@ class Path(SvgNode):
 class BaseGen:
     def getColorFromHex(self, hex_color):
         hex_color = hex_color.replace('#', '')
-        return 'rgb'+str(struct.unpack('BBB', hex_color.decode('hex')))
+        hex_binary = binascii.a2b_hex(str.encode(hex_color))
+        return 'rgb'+str(struct.unpack('BBB', hex_binary))
 
     def getColor(self, hash_string):
         return self.getColorFromHex(hash_string[0:6])
@@ -231,16 +234,21 @@ class Iden:
 
     def __init__(self, text, type_iden='pixel', size=None):
         m = hashlib.md5()
-        m.update(text)
+        m.update(text.encode('UTF-8'))
         self.type_iden = type_iden
         self.size = size
         self.hash_string = m.hexdigest()
 
     def getColorFromHex(self, hex_color):
         hex_color = hex_color.replace('#', '')
-        return 'rgb'+str(struct.unpack('BBB', hex_color.decode('hex')))
+        hex_binary = binascii.a2b_hex(str.encode(hex_color))
+        return 'rgb'+str(struct.unpack('BBB', hex_binary))
 
     def setBackgroundColor(self, hex_color):
+        if hex_color is False:
+            hex_color = self.hash_string[7:13]
+            self.backgroundColor = self.getColorFromHex(hex_color)
+            
         self.backgroundColor = self.getColorFromHex(hex_color)
 
     # generate and return svg code

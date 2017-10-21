@@ -1,10 +1,17 @@
 from iden import Iden
+import hashlib
 
-for i in range(1, 1000):
-    iden_avatar = Iden('text' + str(i), 'circle')
-    iden_avatar.setBackgroundColor('#EEEEEE')
-    iden_avatar.save('test/circle-'+str(i)+'.svg')
+m = hashlib.md5()
+bg_colors = ['#FFFFFF', '#EEEEEE', False]
 
-    iden_avatar = Iden('text' + str(i), 'pixel')
-    iden_avatar.setBackgroundColor('#EEEEEE')
-    iden_avatar.save('test/pixel-'+str(i)+'.svg')
+for i in range(0, 2):
+    for bg in bg_colors:
+        name = (str(i) + "test")
+        m.update(name.encode('UTF-8'))
+        iden_avatar = Iden(m.hexdigest(), 'circle')
+        iden_avatar.setBackgroundColor(bg)
+        iden_avatar.save('example/circle-'+m.hexdigest()+'.svg')
+
+        iden_avatar = Iden(m.hexdigest(), 'pixel')
+        iden_avatar.setBackgroundColor(bg)
+        iden_avatar.save('example/pixel-'+m.hexdigest()+'.svg')
